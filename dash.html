@@ -12,6 +12,7 @@
     href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css"
   />
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
         :root {
             --color-light: hsl(252, 30%, var(--light-color-lightness));
     --primary-color: #4a90e2;
@@ -20,12 +21,95 @@
     --sidebar-width: 150px;
     --color-dark: hsl(252, 30%, var(--dark-color-lightness));
 }
+:root {
+    --primary-color-hue: 252;
+    --dark-color-lightness: 17%;
+    --light-color-lightness: 95%;
+    --white-color-lightness: 100%;
+
+    --color-white: hsl(252, 30%, var(--white-color-lightness));
+    --color-light: hsl(252, 30%, var(--light-color-lightness));
+    --color-grey: hsl(252, 15%, 65%);
+    --color-primary: hsl(var(--primary-color-hue), 75%, 60%);
+    --color-secondary: hsl(252, 100%, 90%);
+    --color-success: hsl(120, 95%, 65%);
+    --color-danger: hsl(0, 95%, 65%);
+    --color-dark: hsl(252, 30%, var(--dark-color-lightness));
+    --color-black: hsl(252, 30%, 10%);
+
+    --border-radius: 2rem;
+    --card-border-radius: 1rem;
+    --btn-padding: 0.6rem 2rem;
+    --search-padding: 0.6rem 1rem;
+    --card-padding: 1rem;
+
+    --sticky-top-left: 5.4rem;
+    --sticky-top-right: -18rem;
+
+}
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.profile-photo {
+    width: 2.7rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+nav {
+    width: 100%;
+    background: var(--color-white);
+    padding: 0.7rem 0;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+}
+
+nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.container a{
+    color: var(--color-black);
+    text-decoration: none;
+}
+
+.search-bar {
+    background: var(--color-light);
+    border-radius: var(--border-radius);
+    padding: var(--search-padding);
+    
+}
+
+.search-bar input[type="search"] {
+    background: transparent;
+    height: 25px;
+    border: none;
+    width: 20vw;
+    margin-left: 1rem;
+    font-size: 0.9rem;
+}
+
+nav .search-bar input[type="search"]::placeholder {
+   
+    color: var(--color-grey);
+}
+
 
 body {
     font-family: Arial, sans-serif;
@@ -34,6 +118,7 @@ body {
     }
 
 .dashboard {
+    padding-top: 60px;
     display: flex;
     height: 100vh;
 }
@@ -327,6 +412,26 @@ header {
     </style>
 </head>
 <body>
+    <nav>
+        <div class="container">
+           <a href="mypage.html"> <h2 class="logo">
+              bubbles
+            </h2></a>
+            
+           
+            <div class="search-bar">
+                <i id="search-icon" class="uil uil-search" ></i>
+                <input type="search" placeholder="Search for creators, inspirations, and projects">
+            </div>
+            
+                 <div  class="profile-photo">
+                    <a href="mypage.html">
+            <img src="./images/profile-1.jpg" alt="img"></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
     <div class="dashboard">
         <main class="content">
             

@@ -773,12 +773,7 @@ MEDIA QUERIES FOR SMALL TABLETS AND MOBILE PHONES
 ==================== */
 
 @media screen and (max-width: 600px) {
-    nav .search-bar {
-        display: none;
-    }
-    #search-icon{
-        font-size: 25px;
-    }
+  
 
     main .container {
         grid-template-columns: 0 auto 5rem;
