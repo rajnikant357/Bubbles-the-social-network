@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
+   
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --color-light: hsl(252, 30%, var(--light-color-lightness));
+    --primary-color: #4a90e2;
+    --secondary-color: #f5f5f5;
+    --text-color: #333;
+    --sidebar-width: 150px;
+    --color-dark: hsl(252, 30%, var(--dark-color-lightness));
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color:#000;
+    background: #f7f7f7;
+    }
+
+.dashboard {
+    display: flex;
+    height: 100vh;
+}
+#profile-overview{
+  background-color: rgb(255, 255, 255);
+}
+
+
+
+.logo img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+
+.content {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.dashboard-content {
+    display: grid;
+    gap: 30px;
+}
+
+.profile-overview {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+    position: relative;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-banner {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    position: absolute;
+    bottom: 0px;
+    left: 10%;
+    transform: translateX(-50%);
+}
+
+.banner-upload {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    right: 20px;
+}
+.profile-upload{
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    left: 40px;
+    top: 180px;
+}
+
+.banner-upload:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.profile-upload:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.stat {
+    text-align: center;
+    margin: 0 20px;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    display: block;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #777;
+}
+
+.quick-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #3a7bc8;
+}
+
+.collapsible h2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.toggle-btn[aria-expanded="true"] {
+    transform: rotate(180deg);
+}
+
+.collapsible-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.collapsible-content.expanded {
+    max-height: 10000px;
+}
+
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+.post {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.post img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.post-info {
+    padding: 15px;
+}
+
+.post-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    color: #777;
+}
+
+
+
+@media (max-width: 768px) {
+    .dashboard {
+        flex-direction: column;
+    }
+    .content {
+        padding: 10px;
+    }
+
+    .profile-banner {
+        height: 150px;
+    }
+
+    .profile-picture {
+        width: 100px;
+        height: 100px;
+        bottom: 0px;
+    }
+
+    .post-grid {
+      flex-wrap: wrap;
+        grid-template-rows: 4fr;
+    }
+    .profile-upload{
+        left: 0px;
+    }
+    
+}
+.interaction-buttons {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #e4e6eb;
+    border-bottom: 1px solid #e4e6eb;
+    padding: 4px 0;
+}
+
+.interaction-button {
+    background: none;
+    border: none;
+    color: #65676b;
+    cursor: pointer;
+    font-size: 0.9em;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+}
+
+.interaction-button:hover {
+    transition: 0.3s;
+    transform: scale(1.1);
+    border-radius: 50px;
+}
+
+.comment-section {
+    display: flex;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.comment-input {
+    flex-grow: 1;
+    border: none;
+    background-color: #f0f2f5;
+    border-radius: 20px;
+    padding: 8px 12px;
+    margin: 0 8px;
+}
+
+.post-comment-btn {
+    background-color: rgb(98, 87, 138);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.post-comment-btn:hover {
+    background-color: rgb(66, 56, 104);
+}
+
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <main class="content">
+            
+            <div class="dashboard-content">
+                <section id="profile-overview" class="profile-overview">
+                    <div class="profile-header">
+                        <img src="images/2063918.jpg" alt="Banner" class="profile-banner" id="bannerImage">
+                        <label for="banner-upload" class="banner-upload">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-260q75 0 127.5-52.5T660-440q0-75-52.5-127.5T480-620q-75 0-127.5 52.5T300-440q0 75 52.5 127.5T480-260Zm0-80q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM160-120q-33 0-56.5-23.5T80-200v-480q0-33 23.5-56.5T160-760h126l74-80h240l74 80h126q33 0 56.5 23.5T880-680v480q0 33-23.5 56.5T800-120H160Zm0-80h640v-480H638l-73-80H395l-73 80H160v480Zm320-240Z"/></svg>
+                            <input id="banner-upload" type="file" accept="image/*" style="display: none;">
+                        </label>
+                        <img src="images/profile-1.jpg" alt="Profile Picture" class="profile-picture" id="profileImage">
+                        <label for="profile-upload" class="profile-upload">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-260q75 0 127.5-52.5T660-440q0-75-52.5-127.5T480-620q-75 0-127.5 52.5T300-440q0 75 52.5 127.5T480-260Zm0-80q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM160-120q-33 0-56.5-23.5T80-200v-480q0-33 23.5-56.5T160-760h126l74-80h240l74 80h126q33 0 56.5 23.5T880-680v480q0 33-23.5 56.5T800-120H160Zm0-80h640v-480H638l-73-80H395l-73 80H160v480Zm320-240Z"/></svg>
+                            <input id="profile-upload" type="file" accept="image/*" style="display: none;">
+                        </label>
+                        <h1 id="userName">Rajnikant Gaurav</h1>
+                        <p id="userInfo">@rajnikant• Web Developer • Varanasi, UP</p>
+                    </div>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <span class="stat-value">1,234</span>
+                            <span class="stat-label">Posts</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">5,678</span>
+                            <span class="stat-label">Followers</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">901</span>
+                            <span class="stat-label">Following</span>
+                        </div>
+                    </div>
+                    <div class="quick-actions">
+                        <button class="btn" id="editProfileBtn">
+                            <i class="uil uil-edit"></i>Edit Profile</button>
+                        <button class="btn" id="viewInsightsBtn">View Insights</button>
+                    </div>
+                </section>
+                <section id="engagement-insights" class="collapsible">
+                    <h2>
+                        Engagement Insights
+                        <button class="toggle-btn" aria-expanded="false">▼</button>
+                    </h2>
+                    <div class="collapsible-content">
+                        <canvas id="engagementChart"></canvas>
+                    </div>
+                </section>
+                <section id="recent-posts">
+                    <h2>Recent Posts</h2>
+                    <div class="post-grid">
+                        <div class="post">
+                            <img src="https://via.placeholder.com/300" alt="Post 1">
+                            <div class="post-info">
+                                <h3>My Latest Project</h3>
+                                <p>Check out my new web app!</p>
+                                <div class="post-stats">
+                                    <span><i class="icon-heart"></i> 123</span>
+                                    <span><i class="icon-comment"></i> 45</span>
+                                    <span><i class="icon-share"></i> 67</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post">
+                            <img src="https://via.placeholder.com/300" alt="Post 2">
+                            <div class="post-info">
+                                <h3>Another Great Project</h3>
+                                <p>Just finished this amazing website!</p>
+                                <div class="post-stats">
+                                    <span><i class="icon-heart"></i> 89</span>
+                                    <span><i class="icon-comment"></i> 23</span>
+                                    <span><i class="icon-share"></i> 12</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post">
+                            <img src="https://via.placeholder.com/300" alt="Post 2">
+                            <div class="post-info">
+                                <h3>Another Great Project</h3>
+                                <p>Just finished this amazing website!</p>
+                                <div class="post-stats">
+                                    <span><i class="icon-heart"></i> 89</span>
+                                    <span><i class="icon-comment"></i> 23</span>
+                                    <span><i class="icon-share"></i> 12</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post">
+                            <img src="https://via.placeholder.com/300" alt="Post 2">
+                            <div class="post-info">
+                                <h3>Another Great Project</h3>
+                                <p>Just finished this amazing website!</p>
+                                <div class="post-stats">
+                                    <span><i class="icon-heart"></i> 89</span>
+                                    <span><i class="icon-comment"></i> 23</span>
+                                    <span><i class="icon-share"></i> 12</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    const bannerUpload = document.getElementById('banner-upload');
+    const profileUpload = document.getElementById('profile-upload');
+    const bannerImage = document.getElementById('bannerImage');
+    const profileImage = document.getElementById('profileImage');
+    const editProfileBtn = document.getElementById('editProfileBtn');
+    const userName = document.getElementById('userName');
+    const userInfo = document.getElementById('userInfo');
+    const viewInsightsBtn = document.getElementById('viewInsightsBtn');
+    const engagementInsights = document.getElementById('engagement-insights');
+    const toggleBtn = engagementInsights.querySelector('.toggle-btn');
+    const collapsibleContent = engagementInsights.querySelector('.collapsible-content');
+
+    function handleImageUpload(event, imgElement) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imgElement.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    bannerUpload.addEventListener('change', (e) => handleImageUpload(e, bannerImage));
+    profileUpload.addEventListener('change', (e) => handleImageUpload(e, profileImage));
+
+    let isEditing = false;
+
+    editProfileBtn.addEventListener('click', function() {
+        if (isEditing) {
+            this.textContent = 'Edit Profile';
+            userName.contentEditable = false;
+            userInfo.contentEditable = false;
+        } else {
+            this.textContent = 'Save Profile';
+            userName.contentEditable = true;
+            userInfo.contentEditable = true;
+        }
+        isEditing = !isEditing;
+    });
+
+    function toggleInsights() {
+        const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+        toggleBtn.setAttribute('aria-expanded', !isExpanded);
+        collapsibleContent.classList.toggle('expanded');
+        if (!isExpanded) {
+            renderChart();
+        }
+    }
+
+    viewInsightsBtn.addEventListener('click', toggleInsights);
+    toggleBtn.addEventListener('click', toggleInsights);
+
+    function renderChart() {
+        const ctx = document.getElementById('engagementChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed',
+'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Likes',
+                    data: [12, 19, 3, 5, 2, 3, 10],
+                    borderColor: 'rgb(255, 99, 132)',
+                    tension: 0.1
+                }, {
+                    label: 'Comments',
+                    data: [7, 11, 5, 8, 3, 7, 9],
+                    borderColor: 'rgb(54, 162, 235)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+});
+const list = document.querySelectorAll(".list");
+function activelink() {
+  list.forEach((item) => item.classList.remove("active"));
+  this.classList.add("active");
+}
+list.forEach((item) => item.addEventListener("click", activelink));
+
+
+    </script>
+</body>
+</html>
+
