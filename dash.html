@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+
+    <link rel="stylesheet" href="dash.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css" />
+</head>
+
+<body>
+    <nav>
+        <div class="container">
+            <a href="mypage.html">
+                <h2 class="logo">
+                    bubbles
+                </h2>
+            </a>
+            <div class="search-bar">
+                <i id="search-icon" class="uil uil-search"></i>
+                <input type="search" placeholder="Search for creators, inspirations, and projects">
+            </div>
+            <div class="create">
+                <a href="index.html"><button class="btn btn-primary" for="create-post"><svg
+                            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#fff">
+                            <path
+                                d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z" />
+                        </svg></button></a>
+                <div class="profile-photo">
+
+                    <div class="profile-photo">
+                        <a href="mypage.html">
+                            <img src="./images/profile-1.jpg" alt="img"></a>
+                    </div>
+                </div>
+            </div>
+    </nav>
+
+    <div class="dashboard">
+        <main class="content">
+
+            <div class="dashboard-content">
+                <section id="profile-overview" class="profile-overview">
+                    <div class="profile-header">
+                        <img src="images/2063918.jpg" alt="Banner" class="profile-banner" id="bannerImage">
+                        <label for="banner-upload" class="banner-upload">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                                fill="#e8eaed">
+                                <path
+                                    d="M480-260q75 0 127.5-52.5T660-440q0-75-52.5-127.5T480-620q-75 0-127.5 52.5T300-440q0 75 52.5 127.5T480-260Zm0-80q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM160-120q-33 0-56.5-23.5T80-200v-480q0-33 23.5-56.5T160-760h126l74-80h240l74 80h126q33 0 56.5 23.5T880-680v480q0 33-23.5 56.5T800-120H160Zm0-80h640v-480H638l-73-80H395l-73 80H160v480Zm320-240Z" />
+                            </svg>
+                            <input id="banner-upload" type="file" accept="image/*" style="display: none;">
+                        </label>
+                        <img src="images/profile-1.jpg" alt="Profile Picture" class="profile-picture" id="profileImage">
+                        <label for="profile-upload" class="profile-upload">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                                fill="#e8eaed">
+                                <path
+                                    d="M480-260q75 0 127.5-52.5T660-440q0-75-52.5-127.5T480-620q-75 0-127.5 52.5T300-440q0 75 52.5 127.5T480-260Zm0-80q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM160-120q-33 0-56.5-23.5T80-200v-480q0-33 23.5-56.5T160-760h126l74-80h240l74 80h126q33 0 56.5 23.5T880-680v480q0 33-23.5 56.5T800-120H160Zm0-80h640v-480H638l-73-80H395l-73 80H160v480Zm320-240Z" />
+                            </svg>
+                            <input id="profile-upload" type="file" accept="image/*" style="display: none;">
+                        </label>
+                        <h1 id="userName">Rajnikant Gaurav</h1>
+                        <p id="userInfo">@rajnikant• Web Developer • Varanasi, UP</p>
+                    </div>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <span class="stat-value">1,234</span>
+                            <span class="stat-label">Posts</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">5,678</span>
+                            <span class="stat-label">Followers</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">901</span>
+                            <span class="stat-label">Following</span>
+                        </div>
+                    </div>
+                    <div class="quick-actions">
+                        <button class="btn" id="editProfileBtn">
+                            <i class="uil uil-edit"></i>Edit Profile</button>
+                        <button class="btn" id="viewInsightsBtn">View Insights</button>
+                    </div>
+                </section>
+                <section id="engagement-insights" class="collapsible">
+                    <h2>
+                        Engagement Insights
+                        <button class="toggle-btn" aria-expanded="false">▼</button>
+                    </h2>
+                    <div class="collapsible-content">
+                        <canvas id="engagementChart"></canvas>
+                    </div>
+                </section>
+                <section id="recent-posts">
+                    <h2>Recent Posts</h2>
+                    <div class="post-grid">
+                        <div class="post">
+                            <img src="images/a_coding_post_that_can_i_post (1).jpeg" alt="Post 1">
+                            <div class="post-info">
+                                <h3>My Latest Project</h3>
+                                <p>Check out my new web app amazing website!</p>
+                                <div class="post-stats">
+                                    <span><i class="uil uil-heart-alt"></i>1283</span>
+                                    <span><i class="uil uil-comment-dots"></i>45</span>
+                                    <span><i class="uil uil-share-alt"></i>67</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post">
+                            <img src="images/a_coding_post_that_can_i_post (2).jpeg" alt="Post 2">
+                            <div class="post-info">
+                                <h3>Another Great Project</h3>
+                                <p>Just finished this amazing website!</p>
+                                <div class="post-stats">
+                                    <span><i class="uil uil-heart-alt"></i> 878</span>
+                                    <span><i class="uil uil-comment-dots"></i>23</span>
+                                    <span><i class="uil uil-share-alt"></i> 12</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post">
+                            <img src="images/a_coding_post_that_can_i_post (3).jpeg" alt="Post 2">
+                            <div class="post-info">
+                                <h3>Project no 2 Done!</h3>
+                                <p>Just finished it today, it's an amazing website!</p>
+                                <div class="post-stats">
+                                    <span><i class="uil uil-heart-alt"></i>209</span>
+                                    <span><i class="uil uil-comment-dots"></i>23</span>
+                                    <span><i class="uil uil-share-alt"></i> 12</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post">
+                            <img src="images/a_coding_post_that_can_i_post.jpeg" alt="Post 2">
+                            <div class="post-info">
+                                <h3>Coded for 3 hours</h3>
+                                <p>Web development is so fun to do!</p>
+                                <div class="post-stats">
+                                    <span><i class="uil uil-heart-alt"></i>1289</span>
+                                    <span><i class="uil uil-comment-dots"></i>23</span>
+                                    <span><i class="uil uil-share-alt"></i>12</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script src="dash.js"></script>
+</body>
+
+</html>

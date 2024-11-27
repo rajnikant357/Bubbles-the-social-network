@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit here</title>
+    <script
+      src="https://kit.fontawesome.com/f4eeb6c6ab.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        box-sizing: border-box;
+      }
+      body {
+        background: #eeeded;
+        color: #fff;
+      }
+      h2{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: 35%;
+        top: 50%;
+        z-index: -999;
+      }
+      .container{
+        align-content: center;
+        justify-content: center;
+      }
+      .left {
+        display: flex;
+      }
+      .right{
+        display: none;
+      }
+      button {
+        color: #fff;
+        background: #0c75ff;
+        border: 0;
+        border-radius: 20px;
+        margin: 5px;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 20px;
+        width: 70px;
+      }
+      .js-btn {
+        margin: 5px;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 20px;
+        width: 110px;
+      }
+      textarea {
+        width: 100%;
+        height: 100%;
+        background: #1f1f1f;
+        color: #fff;
+        padding: 10px 20px;
+        border: 0;
+        outline: 0;
+        font-size: 18px;
+      }
+      .html,
+      .css,
+      .js {
+        z-index: -99;
+        display: block;
+        position: absolute;
+        top: 45px;
+        width: 100%;
+        height: 100%;
+      }
+      .css,
+      .js {
+        display: none;
+        position: absolute;
+        top: 45px;
+        width: 100%;
+        height: 100%;
+      }
+
+      iframe{
+        z-index: 999;
+        width: 100%;
+        height: 100vh;
+        background: #fff;
+        border: 0;
+        outline: 0;
+      }
+      #cross {
+        position: absolute;
+        right: 2%;
+      }
+      .output {
+        margin-top: 0%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        background: #0c75ff;
+        height: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2><--Please Open any tab--></h2>
+    <div class="container">
+        
+    <div class="left">
+      <button class="preview" onclick="show()">
+        <i class="fa-solid fa-laptop-code"></i>Preview
+      </button>
+      <button class="html-btn" onclick="showhtml()">
+        <i class="fa-brands fa-html5"></i>HTML
+      </button>
+      <button class="css-btn" onclick="showcss()">
+        <i class="fa-brands fa-css3-alt"></i>CSS
+      </button>
+      <button class="js-btn" onclick="showjs()">
+        <i class="fa-brands fa-js"></i>JAVASCRIPT
+      </button>
+    </div>
+    <div id="right" class="right">
+      <label class="output"
+        ><i class="fa-solid fa-code"></i>Preview
+        <i onclick="compres()" class="fa-solid fa-compress"></i>
+        <i onclick="hide()" id="cross" class="fa-regular fa-circle-xmark"></i
+      ></label>
+      <iframe id="output"></iframe>
+    </div>
+    <div id="html" class="html">
+      <label class="output"
+        ><i class="fa-brands fa-html5"></i>HTML
+        <i
+          onclick="hidehtml()"
+          id="cross"
+          class="fa-regular fa-circle-xmark"
+        ></i
+      ></label>
+      <textarea id="html-code" onkeyup="run()"></textarea>
+    </div>
+    <div id="css" class="css">
+      <label class="output"
+        ><i class="fa-brands fa-css3-alt"></i>CSS
+        <i onclick="hidecss()" id="cross" class="fa-regular fa-circle-xmark"></i
+      ></label>
+      <textarea id="css-code" onkeyup="run()"></textarea>
+    </div>
+    <div id="js" class="js">
+      <label class="output"
+        ><i class="fa-brands fa-js"></i>JAVASCRIPT
+        <i onclick="hidejs()" id="cross" class="fa-regular fa-circle-xmark"></i
+      ></label>
+      <textarea id="js-code" onkeyup="run()"></textarea>
+    </div>
+</div>
+
+
+
+    <script>
+      function run() {
+        let htmlCode = document.getElementById("html-code").value;
+        let cssCode = document.getElementById("css-code").value;
+        let jsCode = document.getElementById("js-code").value;
+        let output = document.getElementById("output");
+        output.contentDocument.body.innerHTML =
+          htmlCode + "<style>" + cssCode + "</style>";
+        output.contentWindow.eval(jsCode);
+      }
+
+      var div = document.getElementById("right");
+      var html = document.getElementById("html");
+      var css = document.getElementById("css");
+      var js = document.getElementById("js");
+      var display = 0;
+      function hide() {
+        if (display == 0) {
+          div.style.display = "none";
+          display = 0;
+        }
+      }
+      
+      function hidehtml() {
+        html.style.display = "none";
+        display = 0;
+      }
+      function hidecss() {
+        css.style.display = "none";
+        display = 0;
+      }
+      function hidejs() {
+        js.style.display = "none";
+        display = 0;
+      }
+      function show() {
+        if (display == 0) {
+          div.style.display = "block";
+          display = 0;
+        } else {
+          div.style.display = "none";
+          display = 0;
+        }
+      }
+      function showhtml() {
+        if (display == 0) {
+          html.style.display = "block";
+          display = 0;
+        } else {
+          html.style.display = "none";
+          display = 0;
+        }
+      }
+      function showcss() {
+        if (display == 0) {
+          css.style.display = "block";
+          display = 0;
+        } else {
+          css.style.display = "none";
+          display = 0;
+        }
+      }
+      function showjs() {
+        if (display == 0) {
+          js.style.display = "block";
+          display = 0;
+        } else {
+          js.style.display = "none";
+          display = 0;
+        }
+      }
+    </script>
+  </body>
+</html>
+
+<!-- 
+
+<i class="fa-solid fa-expand"></i>
+<i class="fa-solid fa-compress"></i>
+<i class="fa-regular fa-circle-xmark"></i>
+<i class="fa-solid fa-forward"></i>
+<i class="fa-solid fa-laptop-code"></i>
+
+-->

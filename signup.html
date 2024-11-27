@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up / Sign In</title>
+    <link rel="stylesheet" href="signup.css">
+   
+</head>
+<body>
+    
+    <div class="container" id="container">
+        <a class="close" href="index.html"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a>
+        <div class="form-container sign-up-container">
+            <form class="form" id="signUpForm">
+                <h1>Create Account</h1>
+                <input type="text" placeholder="Full Name" required />
+                <input type="email" placeholder="Email" required />
+                <input type="phone" placeholder="Phone" required />
+                <input type="password" placeholder="Password" required />
+                <input checked type="password" placeholder="Confirm Password" required />
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form class="form" id="signInForm">
+                <h1>Sign in</h1>
+                <input type="email" id="signInEmail" placeholder="Email/Phone" required />
+                <input type="password" id="signInPassword" placeholder="Password" required />
+                <a href="#">Forgot your password?</a>
+                <button type="submit">LogIn</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Hello, Friend!</h1>
+                    <p>Create your account and start your journey.</p>
+                    <p>Or if already have and account please login here.</p>
+                    <button class="ghost" id="signIn">Log In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Welcome Back!</h1>
+                    <p>To keep connected with us please login with your personal info</p>
+                    <p>Or create your account here.</p>
+                    <button class="ghost" id="signUp">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="signup.js"></script>
+</body>
+</html>
